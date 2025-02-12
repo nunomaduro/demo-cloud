@@ -10,12 +10,12 @@ Route::view('/', 'welcome');
 // create a status endpoint that query the databases:
 Route::get('/status', function () {
     $time = Benchmark::measure(function () {
-        User::factory()->create();
+        User::query()->count();
     });
 
     return response()->json([
         'status' => 200,
-        'timeDoingAnInsert' => $time,
+        'timeDoingAnCount' => $time,
         'usersCount' => User::query()->count(),
     ]);
 });
